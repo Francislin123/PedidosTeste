@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/_template.xhtml">
+	<ui:define name="cabecalho">
+		<h:outputText value="Cadastro de pedidos" />
+	</ui:define>
+
+	<ui:define name="corpo">
+
+		<h:form>
+			<f:validateBean disabled="true">
+				<h:messages />
+				<h:panelGrid columns="3" border="1">
+
+					<h:outputText value="Cliente" />
+					<h:selectOneMenu value="#{produtosBean.codigoCliente}">
+						<f:selectItem itemLabel="Escolha o cliente" itemValue="" noSelectionOption="true" />
+						<f:selectItems value="#{clienteBean.clientes}" var="cliente" itemLabel="#{cliente.clienteNome} - #{cliente.clienteEndereco}"
+							itemValue="#{cliente.codigoCliente}" />
+					</h:selectOneMenu>
+										
+					<h:outputText value="Nome do produto"/>
+			        	<h:inputText id="nomeDoProduto" value="#{produtosBean.produtos.nomeDoProduto}"/>
+			        	<h:message for="nomeDoProduto" />
+			        	
+						<h:outputText value="Valor do produto"/>
+						<h:inputText id="valorUnitárioProduto" value="#{produtosBean.produtos.valorUnitárioProduto}"/>
+						<h:message for="valorUnitárioProduto" />
+			        	
+			        	<h:outputText value="Quantidade de produtos"/>
+						<h:inputText id="quantidadeDeProdutos" value="#{produtosBean.produtos.quantidadeDeProdutos}" />
+						<h:message for="quantidadeDeProdutos" />
+
+					<br />
+
+					<h:commandButton value="Gravar" action="#{produtosBean.grava}" />
+				</h:panelGrid>
+
+			</f:validateBean>
+		</h:form>
+
+		<h2>
+			<h:outputText value="Todos os produtos" />
+		</h2>
+		<hr />
+
+
+		<h:form>
+			<h:dataTable value="#{produtosBean.produtos}" var="produtos">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Numero de controle" />
+					</f:facet>
+	        		#{produtos.numeroControle}
+	        	</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Cliente" />
+					</f:facet>
+	        		#{produtos.cliente.clienteNome} - #{produtos.cliente.clienteEndereco}
+	        	</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nome do produto" />
+					</f:facet>
+	        		#{produtos.nomeDoProduto}
+	        	</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Valor do produto" />
+					</f:facet>
+					<h:outputText value="#{produtos.valorUnitárioProduto}">
+						<f:convertNumber pattern="R$ #0.00" />
+					</h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Quantidade de produtos" />
+					</f:facet>
+	        		#{produtos.quantidadeDeProdutos}
+	        	</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Ações" />
+					</f:facet>
+					<h:commandLink value="Remover" action="#{produtosBean.remove}">
+						<f:setPropertyActionListener value="#{produtos}"
+							target="#{produtosBean.produtos}" />
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

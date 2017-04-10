@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/_template.xhtml">
+   		<ui:define name="cabecalho">
+		   <h:outputText value="Cadastro de Clientes" />
+    	</ui:define>
+		   
+   		<ui:define name="corpo">
+	        <h:form>
+	        	<f:validateBean disabled="true">
+			        <h:panelGrid columns="3">                                       
+			        	<h:outputText value="CodigoCliente" rendered="#{clienteBean.cliente.codigoCliente!=null}" />
+			        	<h:inputText id="codigoCliente" value="#{clienteBean.cliente.codigoCliente}" rendered="#{clienteBean.cliente.codigoCliente!=null}" readonly="true"/>
+			        	<h:message for="codigoCliente"  rendered="#{clienteBean.cliente.codigoCliente!=null}" />
+			        	
+			        	<h:outputText value="Nome do cliente"/>
+			        	<h:inputText id="clienteNome" value="#{clienteBean.cliente.clienteNome}"/>
+			        	<h:message for="clienteNome" />
+			        	
+						<h:outputText value="Endereço do cliente"/>
+						<h:inputText id="clienteEndereco" value="#{clienteBean.cliente.clienteEndereco}"/>
+						<h:message for="clienteEndereco" />
+			        	
+			        	<h:commandButton value="Gravar" action="#{clienteBean.grava}"/> 
+			        </h:panelGrid>
+			    </f:validateBean>
+	        </h:form>
+	        
+	        <h2><h:outputText value="Todos os clientes" /></h2>
+	        <hr />
+	        <h:form>
+	        <h:dataTable border="1" value="#{clienteBean.clientes}" var="cliente">
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="CodigoCliente"/></f:facet>
+	        		#{cliente.codigoCliente}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="ClienteNome"/></f:facet>
+	        		#{cliente.clienteNome}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="ClienteEndereco"/></f:facet>
+	        		#{cliente.clienteEndereco}
+	        	</h:column>
+	        	
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Ações"/></f:facet>
+	        		<h:commandLink value="Remover" action="#{clienteBean.remove}">
+					<f:setPropertyActionListener value="#{cliente}" target="#{clienteBean.cliente}"/>
+	        		</h:commandLink> |
+	        		<h:commandLink value="Alterar">
+					<f:setPropertyActionListener value="#{cliente}" target="#{clienteBean.cliente}"/>
+	        		</h:commandLink>
+	        	</h:column>
+	        </h:dataTable>
+	        </h:form>
+		</ui:define>
+	</ui:composition>
+</html>

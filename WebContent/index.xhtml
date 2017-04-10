@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+	<f:view contentType="text/html" />
+    <h:head>
+        <title>Sistema de Pedidos</title>
+    </h:head>
+    <h:body>
+    	<div style="position:relative;">
+    		<h:graphicImage library="img" name="caelum.png" style="padding:0; margin:0;"/>
+        	<h2 style="position:absolute; display:inline; left:200px; bottom:0; padding:0; margin:0">Sistema de Pedidos</h2>
+		</div>
+		
+		<hr />
+		
+	    <h:panelGrid columns="1" style="float:left">
+        
+			<h3>Sistema de pedidos opções:</h3>        
+	        <h:link outcome="clientes" value="Cadastro de clientes"/>
+	        <h:link outcome="produtos" value="Cadastro de produtos"/>
+	       	 
+	    </h:panelGrid>    
+    </h:body>
+</html>
